@@ -12,3 +12,5 @@ from fastapi i port FastAPI
 app=FastAPI()
 @app.get('/')
 def r(): return {'Hello':'K8s'}
+
+"Hello: World"
