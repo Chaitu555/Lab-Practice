@@ -14,3 +14,6 @@ app=FastAPI()
 def r(): return {'Hello':'K8s'}
 
 "Hello: World"
+age = 25,
+print(age)
+
