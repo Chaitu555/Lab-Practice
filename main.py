@@ -17,3 +17,5 @@ def r(): return {'Hello':'K8s'}
 age = 25,
 print(age)
 
+"name = 'Python'\nprint(f'Hello, {name}!')"
+
