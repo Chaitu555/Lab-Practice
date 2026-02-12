@@ -1,0 +1,740 @@
+import React, { useState, useEffect } from 'react';
+import { Play, RotateCcw, Lightbulb, CheckCircle, Lock, Trophy, Flame, Server, Code2, Terminal } from 'lucide-react';
+
+const DevOpsPythonLearning = () => {
+  // DevOps-focused level definitions with real-world context
+  const levels = [
+    {
+      id: 1,
+      title: "Print Statement - Your First Log Message",
+      category: "Foundation",
+      realWorld: "Every script needs to output information. In DevOps, this is how you log deployment steps, server status, or error messages.",
+      description: "Understanding print() - the foundation of all output in Python",
+      task: "Print 'Server is starting...' to console",
+      starterCode: "# In DevOps, we always log what's happening\n# print() sends messages to stdout (standard output)\n# This is what you see in terminal or log files\n\n",
+      expectedOutput: "Server is starting...",
+      hint: "Syntax: print('your message here')\nAnything inside quotes becomes text output",
+      solution: "print('Server is starting...')",
+      explanation: `
+WHY WE USE THIS:
+- Every automation script needs to show what it's doing
+- Logs help debug when things go wrong
+- CI/CD pipelines display print statements in console
+
+HOW IT WORKS:
+- print() is a built-in function (already available in Python)
+- Text goes inside quotes: 'text' or "text"
+- Python sends this to your terminal/console
+      `.trim()
+    },
+    {
+      id: 2,
+      title: "Variables - Storing Server Configuration",
+      category: "Foundation",
+      realWorld: "Instead of hardcoding values, we store them in variables. This makes scripts reusable and easier to update.",
+      description: "Variables store values you want to reuse. Think of them as labeled boxes.",
+      task: "Create a variable 'server_port' with value 8080, then print it",
+      starterCode: "# Variables are containers for storing data\n# Naming: use lowercase with underscores (Python style)\n# No need to declare type - Python figures it out!\n\n",
+      expectedOutput: "8080",
+      hint: "Create: server_port = 8080\nUse: print(server_port)",
+      solution: "server_port = 8080\nprint(server_port)",
+      explanation: `
+WHY WE USE THIS:
+- Configuration values change (ports, IPs, paths)
+- Variables make code maintainable
+- Easy to update one place instead of many
+
+HOW IT WORKS:
+- variable_name = value (assignment)
+- Python stores the value in memory
+- Use the name to retrieve the value later
+
+DEVOPS TIP:
+Later you'll learn to get these from environment variables or config files!
+      `.trim()
+    },
+    {
+      id: 3,
+      title: "String Variables - Server Hostnames",
+      category: "Foundation",
+      realWorld: "Strings (text) are everywhere: server names, file paths, URLs, API endpoints.",
+      description: "Strings are text data. Most DevOps work involves processing text.",
+      task: "Store hostname 'prod-server-01' in a variable, print 'Connecting to prod-server-01'",
+      starterCode: "# Strings = text data (in quotes)\n# Single 'text' or double \"text\" quotes both work\n# f-strings let you insert variables into text\n\n",
+      expectedOutput: "Connecting to prod-server-01",
+      hint: "hostname = 'prod-server-01'\nprint(f'Connecting to {hostname}')",
+      solution: "hostname = 'prod-server-01'\nprint(f'Connecting to {hostname}')",
+      explanation: `
+WHY WE USE THIS:
+- Server names, file paths, commands are all strings
+- f-strings make dynamic messages easy
+- Cleaner than concatenating with +
+
+HOW IT WORKS:
+- f'text {variable}' is an f-string (formatted string)
+- {variable} gets replaced with actual value
+- Much cleaner than: 'Connecting to ' + hostname
+
+STRING TYPES:
+- 'single quotes'
+- "double quotes"  
+- f'formatted with {variables}'
+      `.trim()
+    },
+    {
+      id: 4,
+      title: "Data Types - Understanding Your Data",
+      category: "Foundation",
+      realWorld: "Python has different types: numbers for ports/counts, strings for names, booleans for status checks.",
+      description: "Different data needs different types. Python is smart but you should know them.",
+      task: "Create: port=443 (int), ssl_enabled=True (bool), server='web-01' (str). Print the port.",
+      starterCode: "# Python main types:\n# int (numbers): 80, 443, 8080\n# str (text): 'server', \"path\"\n# bool (True/False): for status checks\n# float (decimals): 99.9, 3.14\n\n",
+      expectedOutput: "443",
+      hint: "port = 443\nssl_enabled = True\nserver = 'web-01'\nprint(port)",
+      solution: "port = 443\nssl_enabled = True\nserver = 'web-01'\nprint(port)",
+      explanation: `
+WHY WE USE THIS:
+- Different operations for different types
+- Can't add numbers to strings (Python will error)
+- Type awareness prevents bugs
+
+DATA TYPES:
+- int: whole numbers (80, 443, 8080)
+- str: text in quotes ('server', "path")
+- bool: True or False (note capitals!)
+- float: decimals (3.14, 99.9)
+
+DEVOPS EXAMPLES:
+- port numbers → int
+- server names → str
+- service status → bool
+- CPU usage → float
+      `.trim()
+    },
+    {
+      id: 5,
+      title: "Math Operations - Calculating Resources",
+      category: "Foundation",
+      realWorld: "Calculate total memory, disk space percentages, request counts, uptime hours.",
+      description: "Basic math is crucial for resource calculations and metrics.",
+      task: "Calculate total memory: 16GB per server * 5 servers. Print result.",
+      starterCode: "# Math operators:\n# + (add), - (subtract), * (multiply), / (divide)\n# // (integer division), % (remainder/modulo)\n\n",
+      expectedOutput: "80",
+      hint: "memory_per_server = 16\nserver_count = 5\ntotal = memory_per_server * server_count\nprint(total)",
+      solution: "memory_per_server = 16\nserver_count = 5\ntotal = memory_per_server * server_count\nprint(total)",
+      explanation: `
+WHY WE USE THIS:
+- Calculate total resources across infrastructure
+- Determine percentages (disk usage, CPU)
+- Count requests, errors, success rates
+
+OPERATORS:
++ : addition (10 + 5 = 15)
+- : subtraction (10 - 5 = 5)
+* : multiplication (10 * 5 = 50)
+/ : division (10 / 5 = 2.0)
+// : integer division (10 // 3 = 3)
+% : modulo/remainder (10 % 3 = 1)
+
+DEVOPS USE CASES:
+- Total RAM across cluster
+- Disk usage percentage
+- Average response time
+      `.trim()
+    },
+    {
+      id: 6,
+      title: "Conditionals - Health Check Logic",
+      category: "Control Flow",
+      realWorld: "Every automation needs decisions: Is server healthy? Is deployment successful? Should we alert?",
+      description: "if statements let your code make decisions based on conditions.",
+      task: "Check if status_code equals 200. If yes, print 'Server is healthy'",
+      starterCode: "# if statements run code only when condition is True\n# Indentation (4 spaces) shows what's inside the if\n# This is CRITICAL in Python!\n\nstatus_code = 200\n",
+      expectedOutput: "Server is healthy",
+      hint: "if status_code == 200:\n    print('Server is healthy')\n\nNote: == checks equality, = assigns values",
+      solution: "status_code = 200\nif status_code == 200:\n    print('Server is healthy')",
+      explanation: `
+WHY WE USE THIS:
+- Health checks (if status == 200)
+- Error handling (if error_count > 0)
+- Deployment decisions (if tests_pass)
+
+SYNTAX:
+if condition:
+    code_to_run
+    
+COMPARISON OPERATORS:
+== : equal to
+!= : not equal to
+> : greater than
+< : less than
+>= : greater or equal
+<= : less or equal
+
+CRITICAL: INDENTATION
+Python uses indentation (4 spaces) to know what's inside the if
+This code inside MUST be indented!
+
+DEVOPS EXAMPLES:
+if cpu_usage > 80:
+    send_alert()
+if disk_free < 10:
+    cleanup_logs()
+      `.trim()
+    },
+    {
+      id: 7,
+      title: "If-Else - Handling Success and Failure",
+      category: "Control Flow",
+      realWorld: "Every operation has two paths: success or failure. Code both scenarios.",
+      description: "else runs when the if condition is False. Always plan for both outcomes.",
+      task: "If deployment_status is 'success', print 'Deployment completed'. Otherwise print 'Deployment failed'",
+      starterCode: "# if/else gives you two paths\n# One runs when True, other when False\n# Always handle failure cases!\n\ndeployment_status = 'success'\n",
+      expectedOutput: "Deployment completed",
+      hint: "if deployment_status == 'success':\n    print('Deployment completed')\nelse:\n    print('Deployment failed')",
+      solution: "deployment_status = 'success'\nif deployment_status == 'success':\n    print('Deployment completed')\nelse:\n    print('Deployment failed')",
+      explanation: `
+WHY WE USE THIS:
+- Always plan for failure in automation
+- Provide clear feedback for both outcomes
+- Proper error handling prevents silent failures
+
+STRUCTURE:
+if condition:
+    # runs if True
+else:
+    # runs if False
+
+DEVOPS MINDSET:
+Never assume success! Always code the failure path:
+- What if API call fails?
+- What if file doesn't exist?
+- What if server is down?
+
+EXAMPLE:
+if backup_exists:
+    restore_from_backup()
+else:
+    alert_team('No backup found!')
+      `.trim()
+    },
+    {
+      id: 8,
+      title: "Lists - Managing Multiple Servers",
+      category: "Data Structures",
+      realWorld: "You rarely work with one server. Lists store multiple items: servers, IPs, log files.",
+      description: "Lists are ordered collections. Perfect for multiple servers, files, or any group of items.",
+      task: "Create list of servers: ['web-01', 'web-02', 'web-03']. Print the first server.",
+      starterCode: "# Lists store multiple items in order\n# Created with square brackets []\n# Index starts at 0 (first item = 0)\n# Access items with list[index]\n\n",
+      expectedOutput: "web-01",
+      hint: "servers = ['web-01', 'web-02', 'web-03']\nprint(servers[0])  # First item is index 0",
+      solution: "servers = ['web-01', 'web-02', 'web-03']\nprint(servers[0])",
+      explanation: `
+WHY WE USE THIS:
+- Manage multiple servers in automation
+- Process batches of files
+- Store lists of IPs, ports, users
+
+SYNTAX:
+my_list = [item1, item2, item3]
+first = my_list[0]  # First item
+second = my_list[1]  # Second item
+
+INDEXING (CRITICAL!):
+- Python uses 0-based indexing
+- First item is [0], not [1]
+- Last item is [-1] (negative indexes work!)
+
+DEVOPS EXAMPLES:
+servers = ['web-01', 'web-02', 'db-01']
+ports = [80, 443, 8080]
+log_files = ['app.log', 'error.log', 'access.log']
+
+COMMON OPERATIONS:
+len(servers)  # Count items
+servers.append('web-04')  # Add item
+      `.trim()
+    },
+    {
+      id: 9,
+      title: "For Loops - Processing All Servers",
+      category: "Control Flow",
+      realWorld: "The most important loop in DevOps. Process every server, every file, every log entry.",
+      description: "For loops repeat code for each item in a list. Essential for automation.",
+      task: "Loop through servers ['app-01', 'app-02', 'app-03'] and print 'Checking [server]' for each",
+      starterCode: "# for loop processes each item in a list\n# 'server' is a temporary variable (pick any name)\n# Loop body MUST be indented\n\nservers = ['app-01', 'app-02', 'app-03']\n",
+      expectedOutput: "Checking app-01\nChecking app-02\nChecking app-03",
+      hint: "for server in servers:\n    print(f'Checking {server}')",
+      solution: "servers = ['app-01', 'app-02', 'app-03']\nfor server in servers:\n    print(f'Checking {server}')",
+      explanation: `
+WHY WE USE THIS:
+- Deploy to multiple servers
+- Process all log files
+- Check status of all services
+- 90% of automation uses for loops!
+
+SYNTAX:
+for item in list:
+    # do something with item
+    
+HOW IT WORKS:
+1. Takes first item from list
+2. Runs the indented code
+3. Takes next item, runs code again
+4. Continues until list is empty
+
+VARIABLE NAMING:
+for server in servers:  # Good
+for s in servers:  # OK but unclear
+for x in servers:  # Bad - not descriptive
+
+REAL DEVOPS EXAMPLES:
+for server in server_list:
+    check_health(server)
+    
+for log_file in log_files:
+    analyze_errors(log_file)
+    
+for port in open_ports:
+    test_connection(port)
+
+This is THE most used pattern in DevOps automation!
+      `.trim()
+    },
+    {
+      id: 10,
+      title: "Dictionaries - Server Configuration Data",
+      category: "Data Structures",
+      realWorld: "Dictionaries store configuration: server details, API responses, infrastructure state.",
+      description: "Dictionaries store key-value pairs. Like a real dictionary: word → definition.",
+      task: "Create dict with server info: hostname='prod-web-01', ip='10.0.1.5', port=80. Print the IP.",
+      starterCode: "# Dictionaries use curly braces {}\n# Format: {'key': 'value'}\n# Keys are like labels, values are the data\n# Access with dict['key']\n\n",
+      expectedOutput: "10.0.1.5",
+      hint: "server = {'hostname': 'prod-web-01', 'ip': '10.0.1.5', 'port': 80}\nprint(server['ip'])",
+      solution: "server = {'hostname': 'prod-web-01', 'ip': '10.0.1.5', 'port': 80}\nprint(server['ip'])",
+      explanation: `
+WHY WE USE THIS:
+- Store structured configuration
+- Parse JSON responses from APIs
+- Organize related data together
+
+SYNTAX:
+my_dict = {
+    'key1': 'value1',
+    'key2': 'value2'
+}
+value = my_dict['key1']
+
+REAL-WORLD USAGE:
+server_config = {
+    'hostname': 'web-01',
+    'ip': '10.0.1.5',
+    'port': 80,
+    'ssl_enabled': True
+}
+
+WHY BETTER THAN LISTS?
+- Lists: ordered, access by position
+- Dicts: access by meaningful name
+- Much clearer: server['ip'] vs server[1]
+
+API RESPONSES:
+Most APIs return JSON, which Python reads as dictionaries!
+
+response = {
+    'status': 'success',
+    'data': {...}
+}
+if response['status'] == 'success':
+    process_data()
+      `.trim()
+    },
+    {
+      id: 11,
+      title: "Functions - Reusable Health Check",
+      category: "Functions",
+      realWorld: "Don't repeat code! Write a function once, use it everywhere. Core of clean automation.",
+      description: "Functions are reusable blocks of code. Write once, call many times.",
+      task: "Create function 'check_server' that prints 'Server health check started'. Then call it.",
+      starterCode: "# Functions defined with 'def' keyword\n# def function_name():\n#     code to run\n# Call with: function_name()\n\n",
+      expectedOutput: "Server health check started",
+      hint: "def check_server():\n    print('Server health check started')\n\ncheck_server()  # Call the function",
+      solution: "def check_server():\n    print('Server health check started')\n\ncheck_server()",
+      explanation: `
+WHY WE USE THIS:
+- Don't repeat yourself (DRY principle)
+- Organize code into logical pieces
+- Easier to test and debug
+- Make code reusable across scripts
+
+SYNTAX:
+def function_name():
+    # code here
+    # must be indented!
+    
+function_name()  # Call it
+
+HOW IT WORKS:
+1. def creates and stores the function
+2. Nothing happens until you CALL it
+3. Calling runs all the code inside
+
+NAMING CONVENTIONS:
+- Use lowercase with underscores
+- Names should describe what it does
+- check_server() ✓
+- checkServer() ✗ (not Python style)
+- cs() ✗ (not descriptive)
+
+DEVOPS EXAMPLES:
+def restart_service():
+    stop_service()
+    wait(5)
+    start_service()
+    
+def send_alert():
+    log_error()
+    notify_team()
+
+NEXT LEVEL:
+Functions get powerful when you add parameters (next lesson!)
+      `.trim()
+    },
+    {
+      id: 12,
+      title: "Function Parameters - Dynamic Server Checks",
+      category: "Functions",
+      realWorld: "Parameters make functions flexible. Same function, different inputs - like checking any server.",
+      description: "Parameters let you pass data into functions. Makes them reusable with different values.",
+      task: "Create 'ping_server(hostname)' function that prints 'Pinging [hostname]'. Call it with 'web-01'.",
+      starterCode: "# Parameters go inside parentheses\n# def function(parameter):\n#     use parameter inside\n# Call with: function(value)\n\n",
+      expectedOutput: "Pinging web-01",
+      hint: "def ping_server(hostname):\n    print(f'Pinging {hostname}')\n\nping_server('web-01')",
+      solution: "def ping_server(hostname):\n    print(f'Pinging {hostname}')\n\nping_server('web-01')",
+      explanation: `
+WHY WE USE THIS:
+- One function, many uses
+- Check any server, not just one
+- Process any file, any port, any config
+
+SYNTAX:
+def function_name(parameter):
+    # use parameter here
+    
+function_name(value)  # Pass value when calling
+
+PARAMETER = VARIABLE:
+Think of parameters as variables that get their value when you call the function
+- Define: def greet(name):
+- Call: greet('Alice')
+- Inside function: name = 'Alice'
+
+MULTIPLE PARAMETERS:
+def connect_server(hostname, port):
+    print(f'Connecting to {hostname}:{port}')
+    
+connect_server('web-01', 443)
+
+DEVOPS REAL-WORLD:
+def check_disk_space(server, threshold):
+    usage = get_usage(server)
+    if usage > threshold:
+        alert_team(server)
+        
+check_disk_space('web-01', 80)
+check_disk_space('db-01', 90)
+
+Same function, different servers and thresholds!
+
+KEY INSIGHT:
+Without parameters: hardcoded, inflexible
+With parameters: dynamic, reusable
+      `.trim()
+    },
+    {
+      id: 13,
+      title: "Return Values - Getting Results Back",
+      category: "Functions",
+      realWorld: "Functions should return results. Get status codes, parsed data, validation results.",
+      description: "Return sends data back from a function. Critical for getting results.",
+      task: "Create 'get_status_message(code)'. If code==200 return 'OK', else return 'ERROR'. Print result for 200.",
+      starterCode: "# return sends value back to caller\n# def function():\n#     return value\n# result = function()  # Catch the returned value\n\n",
+      expectedOutput: "OK",
+      hint: "def get_status_message(code):\n    if code == 200:\n        return 'OK'\n    else:\n        return 'ERROR'\n\nresult = get_status_message(200)\nprint(result)",
+      solution: "def get_status_message(code):\n    if code == 200:\n        return 'OK'\n    else:\n        return 'ERROR'\n\nresult = get_status_message(200)\nprint(result)",
+      explanation: `
+WHY WE USE THIS:
+- Get data back from functions
+- Use results in other code
+- Chain functions together
+- Essential for real automation!
+
+WITHOUT RETURN:
+def check():
+    print('OK')  # Just prints, no data returned
+    
+check()  # Prints but can't use result
+
+WITH RETURN:
+def check():
+    return 'OK'  # Sends data back
+    
+result = check()  # Now you have the data!
+if result == 'OK':
+    continue_deployment()
+
+RETURN STOPS EXECUTION:
+def validate(status):
+    if status == 200:
+        return True  # Exits here if True
+    return False  # Only runs if status != 200
+
+DEVOPS EXAMPLES:
+def check_health(server):
+    response = ping(server)
+    if response.status == 200:
+        return True
+    return False
+
+is_healthy = check_health('web-01')
+if is_healthy:
+    deploy_to_server()
+
+def get_free_disk(server):
+    total, used = check_disk(server)
+    return total - used
+
+space = get_free_disk('web-01')
+if space < 10:
+    cleanup()
+
+GOLDEN RULE:
+If you need the data later, RETURN it!
+If you just want to show something, PRINT it!
+      `.trim()
+    },
+    {
+      id: 14,
+      title: "Reading Files - Processing Log Files",
+      category: "File Operations",
+      realWorld: "Most DevOps work involves files: logs, configs, data files. Reading is fundamental.",
+      description: "Read file contents into your script. Essential for log analysis and config reading.",
+      task: "Simulate reading a log file. Print 'Reading log file: app.log' then 'Log contains 150 lines'",
+      starterCode: "# File operations in Python:\n# open('file.txt', 'r') - read mode\n# with open() ensures file closes automatically\n# .read() gets all content\n# .readlines() gets list of lines\n\n# For this exercise, just simulate:\n",
+      expectedOutput: "Reading log file: app.log\nLog contains 150 lines",
+      hint: "filename = 'app.log'\nprint(f'Reading log file: {filename}')\nprint('Log contains 150 lines')",
+      solution: "filename = 'app.log'\nprint(f'Reading log file: {filename}')\nprint('Log contains 150 lines')",
+      explanation: `
+WHY WE USE THIS:
+- Analyze log files for errors
+- Read configuration files
+- Process data files
+- Parse server outputs
+
+REAL FILE SYNTAX (for reference):
+with open('app.log', 'r') as file:
+    content = file.read()  # All content as string
+    
+with open('app.log', 'r') as file:
+    lines = file.readlines()  # List of lines
+
+WHY 'with' STATEMENT?
+- Automatically closes file when done
+- Prevents resource leaks
+- Best practice!
+
+FILE MODES:
+'r' - read (default)
+'w' - write (overwrites)
+'a' - append (adds to end)
+
+DEVOPS REAL-WORLD:
+# Count errors in log
+with open('app.log', 'r') as log:
+    errors = 0
+    for line in log:
+        if 'ERROR' in line:
+            errors += 1
+    print(f'Found {errors} errors')
+
+# Read config
+with open('config.txt', 'r') as cfg:
+    for line in cfg:
+        if line.startswith('PORT'):
+            port = line.split('=')[1]
+
+PROCESSING LOGS:
+This is 80% of log analysis:
+1. Open file
+2. Loop through lines
+3. Check for patterns (ERROR, WARNING)
+4. Count or extract information
+      `.trim()
+    },
+    {
+      id: 15,
+      title: "Exception Handling - Robust Error Handling",
+      category: "Error Handling",
+      realWorld: "Production code MUST handle errors gracefully. Servers go down, files don't exist, networks fail.",
+      description: "try/except catches errors without crashing. Professional code always handles failures.",
+      task: "Use try/except to handle a connection. Print 'Attempting connection' then 'Connection successful'",
+      starterCode: "# try/except prevents crashes\n# try:\n#     risky code\n# except:\n#     handle error\n\n",
+      expectedOutput: "Attempting connection\nConnection successful",
+      hint: "try:\n    print('Attempting connection')\n    print('Connection successful')\nexcept:\n    print('Connection failed')",
+      solution: "try:\n    print('Attempting connection')\n    print('Connection successful')\nexcept:\n    print('Connection failed')",
+      explanation: `
+WHY WE USE THIS:
+- Production code MUST handle errors
+- Scripts shouldn't crash on first failure
+- Provide useful error messages
+- Continue running when possible
+
+SYNTAX:
+try:
+    # Code that might fail
+    risky_operation()
+except:
+    # What to do if it fails
+    handle_error()
+
+HOW IT WORKS:
+1. Python runs code in try block
+2. If error occurs, jumps to except
+3. If no error, skips except block
+
+REAL DEVOPS EXAMPLE:
+try:
+    response = requests.get(server_url)
+    if response.status_code == 200:
+        print('Server healthy')
+except:
+    print('Server unreachable')
+    send_alert()
+
+SPECIFIC EXCEPTIONS:
+try:
+    file = open('config.txt', 'r')
+except FileNotFoundError:
+    print('Config file missing!')
+except PermissionError:
+    print('No permission to read file')
+
+FINALLY BLOCK:
+try:
+    connect_to_db()
+    run_query()
+except:
+    log_error()
+finally:
+    close_connection()  # Always runs!
+
+PRODUCTION MINDSET:
+❌ Hope it works
+✓ Assume it might fail, handle it
+
+ALWAYS HANDLE:
+- File operations (file might not exist)
+- Network calls (server might be down)
+- User input (might be invalid)
+- External APIs (might timeout)
+
+DEVOPS MANTRA:
+"Fail gracefully, log everything, alert when critical"
+      `.trim()
+    },
+    {
+      id: 16,
+      title: "String Methods - Parsing Server Output",
+      category: "String Operations",
+      realWorld: "Parse command outputs, clean log data, extract information from text responses.",
+      description: "String methods let you manipulate text. Critical for parsing logs and outputs.",
+      task: "Take 'SERVER STATUS: RUNNING' and print just 'RUNNING' (the part after ': ')",
+      starterCode: "# Useful string methods:\n# .strip() - remove whitespace\n# .split() - split into list\n# .replace() - replace text\n# .lower(), .upper() - change case\n\nstatus = 'SERVER STATUS: RUNNING'\n",
+      expectedOutput: "RUNNING",
+      hint: "parts = status.split(': ')  # Split by ': '\nprint(parts[1])  # Get second part",
+      solution: "status = 'SERVER STATUS: RUNNING'\nparts = status.split(': ')\nprint(parts[1])",
+      explanation: `
+WHY WE USE THIS:
+- Parse command outputs
+- Clean log entries
+- Extract specific values
+- Format data for processing
+
+KEY STRING METHODS:
+
+.split(separator)
+- Splits string into list
+- 'a,b,c'.split(',') → ['a', 'b', 'c']
+- 'key: value'.split(': ') → ['key', 'value']
+
+.strip()
+- Removes whitespace from ends
+- '  text  '.strip() → 'text'
+- Crucial for cleaning log data!
+
+.replace(old, new)
+- Replaces text
+- 'hello'.replace('h', 'H') → 'Hello'
+
+.lower(), .upper()
+- Change case
+- 'ERROR'.lower() → 'error'
+
+REAL DEVOPS PARSING:
+# Parse: "CPU: 45%"
+line = "CPU: 45%"
+value = line.split(': ')[1]  # "45%"
+number = value.replace('%', '')  # "45"
+cpu = int(number)  # 45
+
+# Clean log line
+log = "  [ERROR] Connection failed  "
+clean = log.strip()  # Remove spaces
+if 'ERROR' in clean:
+    alert()
+
+# Parse response
+output = "Status=Active,Uptime=48h"
+parts = output.split(',')  # ['Status=Active', 'Uptime=48h']
+status = parts[0].split('=')[1]  # 'Active'
+
+COMBINING METHODS:
+text = "  SERVER: RUNNING  "
+result = text.strip().split(': ')[1].lower()
+# "running"
+
+COMMON PATTERN:
+Reading command output and extracting values!
+      `.trim()
+    },
+    {
+      id: 17,
+      title: "List Comprehension - Filter Healthy Servers",
+      category: "Advanced Lists",
+      realWorld: "Quick way to filter and transform data. Get only healthy servers, failed jobs, etc.",
+      description: "List comprehension creates new lists in one line. Elegant and fast.",
+      task: "From codes [200, 500, 200, 404, 200], create list of only 200s. Print result.",
+      starterCode: "# List comprehension syntax:\n# new_list = [item for item in old_list if condition]\n# Faster and cleaner than loops!\n\ncodes = [200, 500, 200, 404, 200]\n",
+      expectedOutput: "[200, 200, 200]",
+      hint: "healthy = [code for code in codes if code == 200]\nprint(healthy)",
+      solution: "codes = [200, 500, 200, 404, 200]\nhealthy = [code for code in codes if code == 200]\nprint(healthy)",
+      explanation: `
+WHY WE USE THIS:
+- Filter data in one line
+- Transform lists quickly
+- More readable than for loops
+- Pythonic and efficient
+
+BASIC SYNTAX:
+new_list = [item for item in old_list]
+
+WITH CONDITION:
+filtered = [item for item in old_list if condition]
+
+WITH TRANSFORMATION:
+doubled = [x * 2 for x in numbers]
+
+TRADITIONAL WAY:
+healthy = []
+for code in codes:
+    if code == 200:
