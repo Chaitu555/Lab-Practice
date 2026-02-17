@@ -25,3 +25,5 @@ def r(): return {'Hello':'World'}
 "Hello":"World"
 age = 25,
 print(age)
+
+pwd, cd, cd., cd .., ls, ls -lt, ls -lrt, mkdir 
