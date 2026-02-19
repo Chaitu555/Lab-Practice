@@ -26,4 +26,6 @@ def r(): return {'Hello':'World'}
 age = 25,
 print(age)
 
-pwd, cd, cd., cd .., ls, ls -lt, ls -lrt, mkdir 
+pwd, cd, cd., cd .., ls, ls -lt, ls -lrt, mkdir
+ssh john@jump_host_company.com
+password yes
