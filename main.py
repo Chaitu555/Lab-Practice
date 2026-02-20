@@ -17,11 +17,6 @@ def r(): return {'Hello':'K8s'}
 age = 25,
 print(age) 
 
-from fastapi import FastAPI
-app=FastAPI()
-@app.get('/')
-def r(): return {'Hello':'World'}
-
 "Hello":"World"
 age = 25,
 print(age)
