@@ -24,3 +24,6 @@ print(age)
 pwd, cd, cd., cd .., ls, ls -lt, ls -lrt, mkdir
 ssh john@jump_host_company.com
 password yes
+sudo groupadd Family
+sudo useradd chaitu
+sudo usermod -aG Family chaitu
