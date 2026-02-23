@@ -27,3 +27,4 @@ password yes
 sudo groupadd Family
 sudo useradd chaitu
 sudo usermod -aG Family chaitu
+
