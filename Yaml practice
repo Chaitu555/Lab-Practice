@@ -1,0 +1,10 @@
+# Ansible Automation scripting
+# Ansible script for installing SELinux on multiple servers
+
+- name: Install SELinux packages
+  package: 
+  name: 
+    - selinux-policy
+    - selinux-policy-targeted
+    - policycoreutils
+  state: present
