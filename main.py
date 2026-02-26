@@ -40,4 +40,16 @@ sudo yum install -y selinux-policy selinux-policy-targeted policycoreutils
 #Policycoreutils ------------Tools to manage SELinux.
 #For example:getenforce; setenforce; restorecon; semanage
 
+# Installing the package on a multiple servers and adding the cronjob for them
+sudo yum install -y cronie
+#Here we are installing cronie on a particular server without interaction of second command by using -y after install
+sudo systemctl start crond && sudo systemctl enable crond
+#For envoking the crond and for checking weather it is enabled on it
+sudo systemctl status crond
+#This helps in checking the crond is running or not ex: active(running)
+sudo crontab -e
+#For opening the shell where we need to write the cronjob
+*/5 * * * * echo hello > /tmp/cron_text   -- #It helps to run the job for every 5 minutes and saves to /tmp/cron_text file
+#Every 5 minutes -- Every hour -- Every day -- Every month -- Every weekday
+
 
