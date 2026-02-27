@@ -52,4 +52,15 @@ sudo crontab -e
 */5 * * * * echo hello > /tmp/cron_text   -- #It helps to run the job for every 5 minutes and saves to /tmp/cron_text file
 #Every 5 minutes -- Every hour -- Every day -- Every month -- Every weekday
 
+sudo chmod 755 /tmp/xfusioncorp.sh
+# For giving the permission to the all users in organisation. In this i have saved this in /tmp location but in real time we won't save them there due to security issues.Because any one can edit or delete the file
 
+#For connecting to other/multiple servers we need to generate the SSH key on the main server and then need to copy and save them on the other servers
+ls ~/.ssh    ----- # to check weather the keys are existed or not
+ssh keygen -t rsa -b 2048
+# -t & RSA means the type of key we need to generate && -b 2048 indicates the RSA key length -- the longer the bit, the higher the security will be added t key. 
+Example
+Type	    Security	    Recommended Today?
+RSA2048	  Good       	  Acceptable
+RSA4096	  Stronger   	  Slower
+ED25519	  Very Strong	  Best choice
