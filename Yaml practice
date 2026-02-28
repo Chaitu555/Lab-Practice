@@ -8,3 +8,13 @@
     - selinux-policy-targeted
     - policycoreutils
   state: present
+
+
+price = 150
+print(price) 
+output will be 150 
+#for numbering we no need to add the exclamatorys 
+
+budget = 20
+print(budget + 10)
+output = 30
