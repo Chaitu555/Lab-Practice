@@ -63,4 +63,12 @@ Example
 Type	    Security	    Recommended Today?
 RSA2048	  Good       	  Acceptable
 RSA4096	  Stronger   	  Slower
-ED25519	  Very Strong	  Best choice
+ED25519	  Very Strong	  Bestchoice
+
+#For setting up no permissions for a user with ACL Commands
+sudo setfacl -m u:chaitu:--- /etc/hostname
+#setfacl --- Set File Access Control List 
+#-m  --- Modify (ACL file)
+#u:chaitu:---     --- user name with read write execute permission
+#etc/hostname  --- Target file
+getfacl /etc/hostname #For checking the file permissions after setup
