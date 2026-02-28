@@ -65,10 +65,12 @@ RSA2048	  Good       	  Acceptable
 RSA4096	  Stronger   	  Slower
 ED25519	  Very Strong	  Bestchoice
 
-#For setting up no permissions for a user with ACL Commands
+#For setting up no permissions for a user with ACL Commands 
+#Mainly ACL cmds are used to override the traditional permissions for a particular user. ACL gives more flexibility for permissions
 sudo setfacl -m u:chaitu:--- /etc/hostname
 #setfacl --- Set File Access Control List 
 #-m  --- Modify (ACL file)
 #u:chaitu:---     --- user name with read write execute permission  (ex : r--,-r-) 
 #etc/hostname  --- Target file
 getfacl /etc/hostname #For checking the file permissions after setup
+
