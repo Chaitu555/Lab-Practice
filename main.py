@@ -74,3 +74,8 @@ sudo setfacl -m u:chaitu:--- /etc/hostname
 #etc/hostname  --- Target file
 getfacl /etc/hostname #For checking the file permissions after setup
 
+#For replacing a particular word ia a file -- we use sed command
+sed -i 's/Oldname/Newname/g' /root/filename
+#-i -- modify Directly
+#s -- Substitue 
+#g -- Global 
