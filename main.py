@@ -79,3 +79,7 @@ sed -i 's/Oldname/Newname/g' /root/filename
 #-i -- modify Directly
 #s -- Substitue 
 #g -- Global 
+
+#For copying file securly form one server to other -- login to 1st server with the credentials and use the cmd
+scp /tmp/nautilus.txt.gpg banner@stapp03.stratos.xfusioncorp.com:/home/web/     
+# After scp the path of the file need to be transfered following with the 2nd server ID and :/hom/web/  the path where we are copying
