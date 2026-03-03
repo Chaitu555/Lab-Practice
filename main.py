@@ -73,3 +73,10 @@ sed -i 's/Oldname/Newname/g' /root/filename
 #For copying file securly form one server to other -- login to 1st server with the credentials and use the cmd
 scp /tmp/nautilus.txt.gpg banner@stapp03.stratos.xfusioncorp.com:/home/web/     
 # After scp the path of the file need to be transfered following with the 2nd server ID and :/hom/web/  the path where we are copying
+
+#Crontab access control for the users with cron.allo && cron.deny cmds
+sudo vi /etc/cron.allow 
+type the name which we need to allow for the cron jobs to create/edit
+
+sudo vi /etc/cron.deny
+for restriciting the user to create/ edit the cron jobs
