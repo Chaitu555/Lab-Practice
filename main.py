@@ -79,4 +79,7 @@ sudo vi /etc/cron.allow
 type the name which we need to allow for the cron jobs to create/edit
 
 sudo vi /etc/cron.deny
-for restriciting the user to create/ edit the cron jobs
+#for restriciting the user to create/ edit the cron jobs
+
+#for setting the time zone
+sudo timedatectl set-timezone America/Jamaica                                   
