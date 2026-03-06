@@ -83,3 +83,5 @@ sudo vi /etc/cron.deny
 
 #for setting the time zone
 sudo timedatectl set-timezone America/Jamaica                                   
+
+#
