@@ -84,4 +84,6 @@ sudo vi /etc/cron.deny
 #for setting the time zone
 sudo timedatectl set-timezone America/Jamaica                                   
 
-#
+#For setting the limitations for a user with maximum and minimum creation.
+sudo vi /etc/security/limits.conf
+#In the file itself we need to mention the user name and thier limitations (for example :  soft limit to 1027 && hard limit to 2026)
