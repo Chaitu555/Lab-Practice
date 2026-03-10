@@ -87,3 +87,14 @@ sudo timedatectl set-timezone America/Jamaica
 #For setting the limitations for a user with maximum and minimum creation.
 sudo vi /etc/security/limits.conf
 #In the file itself we need to mention the user name and thier limitations (for example :  soft limit to 1027 && hard limit to 2026)
+
+#For installing tomcat and changing the access port to 6200 including copying the ROOT.war file from jumphost to appserver
+1. On main server check the ROOT.war file Login to the required appserver (ssh to server)
+2. install tomcat (sudo yum install -y tomcat) --- from here done On 2nd server
+3. sudo systemctl enable tomcat 
+4. sudo vi /etc/tomcat/server.xml  ---- Here we need to edit the port number
+5. Exit from appserver and scp the ROOT.war file (/tmp/ROOT.war) to the appserver from main server   ---- (scp /tmp/ROOT.war name@appserver:/tmp)                                                                                                   
+6. Login to appserver now and use the sudo mv /tmp/ROOT.war /var/lib/tomcat/webapps/    for pasting the ROOT.war file
+7. sudo systemctl start tomcat
+8. sudo systemctl status tomcat
+9. curl http://appserver:6200
