@@ -5,7 +5,7 @@ def r(): return {'Hello':'Docker'}
 
 "Hello: World"
 age = 25,
-print(age) 
+print
 
 pwd, cd, cd., cd .., ls, ls -lt, ls -lrt, mkdir
 ssh john@jump_host_company.com
