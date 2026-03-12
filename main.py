@@ -98,3 +98,4 @@ sudo vi /etc/security/limits.conf
 7. sudo systemctl start tomcat
 8. sudo systemctl status tomcat
 9. curl http://appserver:6200
+
