@@ -99,3 +99,12 @@ sudo vi /etc/security/limits.conf
 8. sudo systemctl status tomcat
 9. curl http://appserver:6200
 
+GIT
+#cloning file from one repo to other repo
+Log into the required server
+ls path    # so that we can get the confirmation any files are located or not
+git clone path of 1st repo followed by 2nd repo path   (Ex: git clone /opt/games.git  /usr/src/kodekloudrepos/games)
+ls # need to check weather the files are been copied or not
+cd /usr/src/kodekloudrepos/games  
+ls -a  # Confirming the .git file exits or not
+git remote -v #Verifying the origin
