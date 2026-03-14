@@ -108,3 +108,7 @@ ls # need to check weather the files are been copied or not
 cd /usr/src/kodekloudrepos/games  
 ls -a  # Confirming the .git file exits or not
 git remote -v #Verifying the origin
+
+#Forkingt the Repo
+Need to login with the credetials and search for the repo that is required to fork
+On the top right corner you can find the fork option
