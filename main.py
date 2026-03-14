@@ -112,3 +112,13 @@ git remote -v #Verifying the origin
 #Forkingt the Repo
 Need to login with the credetials and search for the repo that is required to fork
 On the top right corner you can find the fork option
+
+#Copy the sample file and within the cloned repo & add, commit and then push to the Main branch
+ssh thor@jump_host.stratos.xfusioncorp.com
+scp /tmp/index.html natasha@ststor01.stratos.xfusioncorp.com:/tmp
+ssh natasha@ststor01.stratos.xfusioncorp.com
+cd /usr/src/kodekloudrepos/blog
+cp /tmp/index.html .
+git add index.html
+git commit -m "Added sample index.html file"
+git push origin master
