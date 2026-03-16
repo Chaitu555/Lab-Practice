@@ -123,4 +123,6 @@ git add index.html
 git commit -m "Added sample index.html file"
 git push origin master
 
-git commit --global --add safe.directory 
+git commit --global --add safe.directory /path of the file/
+git add 
+git commit
