@@ -122,3 +122,5 @@ cp /tmp/index.html .
 git add index.html
 git commit -m "Added sample index.html file"
 git push origin master
+
+git commit --global --add safe.directory 
