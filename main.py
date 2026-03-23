@@ -126,3 +126,8 @@ git push origin master
 git commit --global --add safe.directory /path of the file/
 git add 
 git commit
+
+
+#Devops Tasks
+#Day 13
+  
