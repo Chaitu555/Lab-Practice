@@ -26,3 +26,4 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64   --- Need to add this line if u ha
 service jenkins restart
 service jenkins status   --- This helps to find weather the jenkins is running or not
 
+
