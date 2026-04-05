@@ -26,4 +26,14 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64   --- Need to add this line if u ha
 service jenkins restart
 service jenkins status   --- This helps to find weather the jenkins is running or not
 
-Jenkins Level 1 Tasks
+Jenkins Level 1 Tasks (Task 2)
+
+#Installing Git and Git lab plugins in jenkins
+Login with the credentials shared by Kodekloud
+Select the gear icon (Manage Plugins) on the top right corner
+Scrol down to see the plugins option
+Select the available plugins option and search for the GIT and GIT lab plugins and select install option
+Once Installation is done checkbox the jenkins restart option for restating the jenkins (Once done -- login with the same credetials)
+For confirming the installation go to the manage jenkins option and check them on the installed plugins option. This will make you confirm the installation of the plugins
+
+
