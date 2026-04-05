@@ -1,4 +1,4 @@
-Jenkins Level 1 Tasks
+Jenkins Level 1 Tasks(Task 1)
 #The DevOps team at xFusionCorp Industries is initiating the setup of CI/CD pipelines and has decided to utilize Jenkins as their server. Execute the task according to the provided requirements: 
 #1. Install Jenkins on the jenkins server using the apt utility only, and start it using the service command. If you face a timeout issue while starting the Jenkins service, first check the service status with service jenkins status Then review the logs in /var/log/jenkins/jenkins.log to identify the cause.
 #2. Jenkin's admin user name should be theadmin, password should be Adm!n321, full name should be Kirsty and email should be kirsty@jenkins.stratos.xfusioncorp.com.
@@ -26,4 +26,4 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64   --- Need to add this line if u ha
 service jenkins restart
 service jenkins status   --- This helps to find weather the jenkins is running or not
 
-
+Jenkins Level 1 Tasks
